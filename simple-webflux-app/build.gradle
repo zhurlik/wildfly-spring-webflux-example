@@ -1,0 +1,14 @@
+apply plugin: 'java'
+
+dependencies {
+    // webflux
+    compile group: 'org.springframework', name: 'spring-webflux', version: "${springVer}"
+    // logback
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: "${logbackClassicVer}"
+    // undertow-core
+    compile group: 'io.undertow', name: 'undertow-core', version: "${undertowCoreVer}"
+
+    // jackson
+    compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-smile', version: "${jacksonVer}"
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: "${jacksonVer}"
+}
