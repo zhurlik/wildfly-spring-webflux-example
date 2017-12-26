@@ -35,3 +35,7 @@ You should have something like this:
             </filters>
         </subsystem>
 ```
+
+# Wildfly module
+To be able `HttpHandler` we have to create our custom Wyldfly module that will use **Spring-Webflux**. It means that at least we need to collect all required jars. Another important stuff is to use `org.springframework.http.server.reactive.UndertowHttpHandlerAdapter`.    
+This class provides as an ability to convert `org.springframework.http.server.reactive.HttpHandler` -> `io.undertow.server.HttpHandler` 
