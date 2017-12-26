@@ -38,4 +38,35 @@ You should have something like this:
 
 # Wildfly module
 To be able `HttpHandler` we have to create our custom Wyldfly module that will use **Spring-Webflux**. It means that at least we need to collect all required jars. Another important stuff is to use `org.springframework.http.server.reactive.UndertowHttpHandlerAdapter`.    
-This class provides as an ability to convert `org.springframework.http.server.reactive.HttpHandler` -> `io.undertow.server.HttpHandler` 
+This class provides as an ability to convert `org.springframework.http.server.reactive.HttpHandler` -> `io.undertow.server.HttpHandler`    
+
+I have used gradle plugin [com.github.zhurlik.jbossmodules](https://plugins.gradle.org/plugin/com.github.zhurlik.jbossmodules) for generating the following **module.xml**
+```
+<?xml version='1.0' encoding='utf-8'?>
+<module xmlns='urn:jboss:module:1.6' name='com.zhurlik'>
+  <resources>
+    <resource-root path='simple-webflux-app-0.1.jar' />
+    <resource-root path='spring-webflux-5.0.2.RELEASE.jar' />
+    <resource-root path='spring-core-5.0.2.RELEASE.jar' />
+    <resource-root path='spring-context-5.0.2.RELEASE.jar' />
+    <resource-root path='spring-beans-5.0.2.RELEASE.jar' />
+    <resource-root path='spring-web-5.0.2.RELEASE.jar' />
+    <resource-root path='reactor-core-3.1.2.RELEASE.jar' />
+    <resource-root path='reactive-streams-1.0.1.jar' />
+    <resource-root path='jackson-dataformat-smile-2.9.3.jar' />
+    <resource-root path='jackson-databind-2.9.3.jar' />
+    <resource-root path='jackson-core-2.9.3.jar' />
+    <resource-root path='jackson-annotations-2.9.0.jar' />
+  </resources>
+  <dependencies>
+    <module name='io.undertow.core' />
+    <module name='org.slf4j' />
+    <module name='org.wildfly.extension.undertow' />
+    <module name='javax.api' />
+    <module name='org.apache.commons.logging' />
+    <module name='org.jboss.xnio' />
+  </dependencies>
+</module>
+```
+
+You can look at [modules/build.gradle](modules/build.gradle)
