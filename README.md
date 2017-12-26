@@ -1,5 +1,5 @@
 # wildfly-spring-webflux-example
-This project was created to be able to show how you can use Spring-Webflux under Wildfly.
+This project was created to be able to show how you can use **[Spring Webflux](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html#spring-webflux)** under **Wildfly**.
 # Changes in the standalone.xml
 * add a new `<filter-ref>`     
 `<filter-ref name="simplewebflux"/>`
@@ -37,7 +37,7 @@ You should have something like this:
 ```
 
 # Wildfly module
-To be able `HttpHandler` we have to create our custom Wyldfly module that will use **Spring-Webflux**. It means that at least we need to collect all required jars. Another important stuff is to use `org.springframework.http.server.reactive.UndertowHttpHandlerAdapter`.    
+To be able `HttpHandler` we have to create our custom Wyldfly module that will use **Spring Webflux**. It means that at least we need to collect all required jars. Another important stuff is to use `org.springframework.http.server.reactive.UndertowHttpHandlerAdapter`.    
 This class provides as an ability to convert `org.springframework.http.server.reactive.HttpHandler` -> `io.undertow.server.HttpHandler`    
 
 I have used gradle plugin [com.github.zhurlik.jbossmodules](https://plugins.gradle.org/plugin/com.github.zhurlik.jbossmodules) for generating the following **module.xml**
