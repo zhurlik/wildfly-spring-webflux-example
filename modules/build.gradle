@@ -1,0 +1,66 @@
+import static com.github.zhurlik.Ver.V_1_6
+
+buildscript {
+    repositories {
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+    }
+    dependencies {
+        classpath 'gradle.plugin.com.github.zhurlik:gradle-jboss-modules:0.18'
+    }
+}
+
+apply plugin: 'com.github.zhurlik.jbossmodules'
+
+dependencies {
+    jbossmodules project(':simple-webflux-app')
+
+    // spring 5
+    jbossmodules group: 'org.springframework', name: 'spring-context', version: "${springVer}"
+    // webflux
+    jbossmodules group: 'org.springframework', name: 'spring-webflux', version: "${springVer}"
+
+    // jackson
+    jbossmodules group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-smile', version: "${jacksonVer}"
+    jbossmodules group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: "${jacksonVer}"
+}
+
+jbossrepos {
+    'wildfly-11.0' {
+        home = '/opt/wildfly-11.0.0.Final'
+        version = V_1_6
+    }
+
+}
+
+modules {
+    simpleWebfluxApp {
+        moduleName = 'com.zhurlik'
+        resources = [
+                "simple-webflux-app-${project.version}.jar",
+                // all below jars can be extracted to separated wildfly modules
+                "spring-webflux.*",
+                "spring-core.*",
+                "spring-context.*",
+                "spring-beans.*",
+                "spring-web-.*",
+                "reactor.*",
+                "reactive.*",
+                "jackson-dataformat-smile.*",
+                "jackson-databind.*",
+                "jackson-core.*",
+                "jackson-annotations.*"
+
+        ]
+        dependencies = [
+                'io.undertow.core',
+                'org.slf4j',
+                'org.wildfly.extension.undertow',
+                'javax.api',
+                'org.apache.commons.logging',
+                'org.jboss.xnio'
+        ]
+    }
+}
+
