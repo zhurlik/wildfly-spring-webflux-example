@@ -70,3 +70,4 @@ I have used gradle plugin [com.github.zhurlik.jbossmodules](https://plugins.grad
 ```
 
 You can look at [modules/build.gradle](modules/build.gradle)
+`gradlew makeModules`
